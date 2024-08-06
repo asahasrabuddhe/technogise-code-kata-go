@@ -7,6 +7,13 @@ const (
 	PlayerO
 )
 
+// Win Conditions
+var winConditions = []int{
+	// diagonals
+	0b100010001, // top-left
+	0b001010100, // top-right
+}
+
 var (
 	ErrGameOver            = errors.New("game over")
 	ErrFieldOccupied error = errors.New("field occupied")
@@ -44,5 +51,22 @@ func (g *Game) TakeField(position int) error {
 
 	g.turn *= -1
 
+	g.checkGameResult()
+
 	return nil
+}
+
+func (g *Game) checkGameResult() {
+	for _, condition := range winConditions {
+		// Player X wins
+		if g.players[PlayerX]&condition == condition {
+			g.isGameOver = true
+			return
+		}
+		// Player O wins
+		if g.players[PlayerO]&condition == condition {
+			g.isGameOver = true
+			return
+		}
+	}
 }
