@@ -30,6 +30,18 @@ func (g *Game) TakeField(position int) error {
 		return ErrGameOver
 	}
 
+	move := 1 << position
+	if g.players[PlayerX]&move != 0 || g.players[PlayerO]&move != 0 {
+		// The position is already taken
+		return ErrFieldOccupied
+	}
+
+	if g.turn == 1 {
+		g.players[PlayerX] |= move
+	} else {
+		g.players[PlayerO] |= move
+	}
+
 	g.turn *= -1
 
 	return nil

@@ -49,4 +49,18 @@ func TestPlayers(t *testing.T) {
 			}
 		},
 	)
+
+	t.Run("a player can take a field if not already taken", func(t *testing.T) {
+		g := NewGame()
+
+		err := g.TakeField(1)
+		if err != nil {
+			t.Errorf("got %v, want nil", err)
+		}
+
+		err = g.TakeField(1)
+		if !errors.Is(err, ErrFieldOccupied) {
+			t.Errorf("got %v, want ErrFieldOccupied", err)
+		}
+	})
 }
