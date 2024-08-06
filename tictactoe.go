@@ -65,6 +65,11 @@ func (g *Game) TakeField(position int) error {
 }
 
 func (g *Game) checkGameResult() {
+	if (g.players[PlayerX] | g.players[PlayerO]) == 0b111111111 {
+		g.isGameOver = true
+		return
+	}
+
 	for _, condition := range winConditions {
 		// Player X wins
 		if g.players[PlayerX]&condition == condition {
