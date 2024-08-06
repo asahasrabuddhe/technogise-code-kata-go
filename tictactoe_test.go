@@ -117,4 +117,43 @@ func TestGame(t *testing.T) {
 			t.Errorf("g.isGameOver should be true")
 		}
 	})
+
+	t.Run("A game is over when all fields in a column (left) are taken by a player", func(t *testing.T) {
+		g := NewGame()
+		_ = g.TakeField(0)
+		_ = g.TakeField(1)
+		_ = g.TakeField(3)
+		_ = g.TakeField(7)
+		_ = g.TakeField(6)
+
+		if !g.isGameOver {
+			t.Errorf("g.isGameOver should be true")
+		}
+	})
+
+	t.Run("A game is over when all fields in a column (middle) are taken by a player", func(t *testing.T) {
+		g := NewGame()
+		_ = g.TakeField(1)
+		_ = g.TakeField(2)
+		_ = g.TakeField(4)
+		_ = g.TakeField(5)
+		_ = g.TakeField(7)
+
+		if !g.isGameOver {
+			t.Errorf("g.isGameOver should be true")
+		}
+	})
+
+	t.Run("A game is over when all fields in a column (right) are taken by a player", func(t *testing.T) {
+		g := NewGame()
+		_ = g.TakeField(2)
+		_ = g.TakeField(3)
+		_ = g.TakeField(5)
+		_ = g.TakeField(6)
+		_ = g.TakeField(8)
+
+		if !g.isGameOver {
+			t.Errorf("g.isGameOver should be true")
+		}
+	})
 }

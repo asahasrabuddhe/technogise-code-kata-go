@@ -16,6 +16,10 @@ var winConditions = []int{
 	0b111000000, // top
 	0b000111000, // middle
 	0b000000111, // bottom
+	// columns
+	0b100100100, // left
+	0b010010010, // middle
+	0b001001001, // right
 }
 
 var (
