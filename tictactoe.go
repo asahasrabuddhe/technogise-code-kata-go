@@ -12,6 +12,10 @@ var winConditions = []int{
 	// diagonals
 	0b100010001, // top-left
 	0b001010100, // top-right
+	// rows
+	0b111000000, // top
+	0b000111000, // middle
+	0b000000111, // bottom
 }
 
 var (
